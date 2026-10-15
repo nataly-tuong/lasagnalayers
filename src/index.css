@@ -1,1 +1,6 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Chango&family=Climate+Crisis:YEAR@1979&family=Fredoka:wght@300..700&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+@theme {
+  --font-hanken-grotesk: "Hanken-grotesk", sans-serif;
+}
