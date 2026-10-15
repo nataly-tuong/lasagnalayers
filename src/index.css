@@ -3,4 +3,6 @@
 
 @theme {
   --font-hanken-grotesk: "Hanken-grotesk", sans-serif;
+  --color-correct: #10a95b;
+  --color-wrong: #ec5d49;
 }

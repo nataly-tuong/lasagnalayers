@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { languages } from "./languages";
+import { clsx } from "clsx";
 
 export default function App() {
   const [currentWord, setCurrentWord] = useState("react");
@@ -35,15 +36,29 @@ export default function App() {
     </span>
   ));
 
-  const keyboardElements = alphabet.split("").map((letter, index) => (
-    <button
-      onClick={() => addGuessedLetter(letter)}
-      className="h-8.75 w-8.75 bg-[#FCBA29] border border-[#D7D7D7] rounded-[3px] cursor-pointer text-[#262626]"
-      key="{letter}}"
-    >
-      {letter.toUpperCase()}
-    </button>
-  ));
+  const keyboardElements = alphabet.split("").map((letter) => {
+    const isGuessed = guessedLetters.includes(letter);
+    const isCorrect = isGuessed && currentWord.includes(letter);
+    const isWrong = isGuessed && !currentWord.includes(letter);
+    const className = clsx(
+      "h-8.75 w-8.75 border border-[#D7D7D7] rounded-[3px] cursor-pointer text-[#262626]",
+      {
+        "bg-[#FCBA29]": !isGuessed,
+        "bg-correct": isCorrect,
+        "bg-wrong": isWrong,
+      },
+    );
+
+    return (
+      <button
+        onClick={() => addGuessedLetter(letter)}
+        className={className}
+        key="{letter}}"
+      >
+        {letter.toUpperCase()}
+      </button>
+    );
+  });
 
   return (
     <main className="flex flex-col items-center min-h-screen p-5 bg-[#262626] text-[#d9d9d9]">
