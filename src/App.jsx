@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { languages } from "./languages";
 
 export default function App() {
+  const [currentWord, setCurrentWord] = useState("react");
+
   const languageElements = languages.map((lang) => {
     const styles = {
       backgroundColor: lang.backgroundColor,
@@ -13,6 +16,15 @@ export default function App() {
       </span>
     );
   });
+
+  const letterElements = currentWord.split("").map((letter, index) => (
+    <span
+      key={index}
+      className="h-[40px] w-[40px] bg-[#323232] flex justify-center items-center text-[1.125rem] border-b border-[#F9F4DA]"
+    >
+      {letter.toUpperCase()}
+    </span>
+  ));
 
   return (
     <main className="flex flex-col items-center min-h-screen p-5 bg-[#262626] text-[#d9d9d9]">
@@ -29,8 +41,11 @@ export default function App() {
         <h2 className="text-[1.25rem] font-bold m-0">You win!</h2>
         <p className="m-0">Well done 🎉</p>
       </section>
-      <section className="flex text-wrap gap-1.25 justify-center max-w-[350px]">
+      <section className="flex text-wrap gap-1.25 justify-center max-w-87.5">
         {languageElements}
+      </section>
+      <section className="flex mt-5 justify-center gap-0.5">
+        {letterElements}
       </section>
     </main>
   );
