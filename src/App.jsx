@@ -4,6 +4,8 @@ import { languages } from "./languages";
 export default function App() {
   const [currentWord, setCurrentWord] = useState("react");
 
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
   const languageElements = languages.map((lang) => {
     const styles = {
       backgroundColor: lang.backgroundColor,
@@ -26,6 +28,15 @@ export default function App() {
     </span>
   ));
 
+  const keyboardElements = alphabet.split("").map((letter, index) => (
+    <button
+      className="h-[35px] w-[35px] bg-[#FCBA29] border-1 border-[#D7D7D7] rounded-[3px] cursor-pointer text-[#262626]"
+      key="{letter}}"
+    >
+      {letter.toUpperCase()}
+    </button>
+  ));
+
   return (
     <main className="flex flex-col items-center min-h-screen p-5 bg-[#262626] text-[#d9d9d9]">
       <header className="text-center">
@@ -46,6 +57,9 @@ export default function App() {
       </section>
       <section className="flex mt-5 justify-center gap-0.5">
         {letterElements}
+      </section>
+      <section className="flex mt-5 flex-wrap gap-[8px] justify-center max-w-[450px]">
+        {keyboardElements}
       </section>
     </main>
   );
