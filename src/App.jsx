@@ -9,6 +9,11 @@ export default function App() {
   const wrongGuessCount = guessedLetters.filter(
     (letter) => !currentWord.includes(letter),
   ).length;
+  const isGameWon = currentWord
+    .split("")
+    .every((letter) => guessedLetters.includes(letter));
+  const isGameLost = wrongGuessCount >= languages.length - 1;
+  const isGameOver = isGameWon || isGameLost;
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
@@ -95,9 +100,11 @@ export default function App() {
       <section className="flex mt-5 flex-wrap gap-2 justify-center max-w-112.5">
         {keyboardElements}
       </section>
-      <button className="mt-6 h-10 w-56.25 bg-[#11B5E5] border border-[#D7D7D7] rounded-sm cursor-pointer text-[#262626]">
-        New Game
-      </button>
+      {isGameOver && (
+        <button className="mt-6 h-10 w-56.25 bg-[#11B5E5] border border-[#D7D7D7] rounded-sm cursor-pointer text-[#262626]">
+          New Game
+        </button>
+      )}
     </main>
   );
 }
