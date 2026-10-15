@@ -61,6 +61,9 @@ export default function App() {
       <section className="flex mt-5 flex-wrap gap-[8px] justify-center max-w-[450px]">
         {keyboardElements}
       </section>
+      <button className="mt-6 h-[40px] w-[225px] bg-[#11B5E5] border-1 border-[#D7D7D7] rounded-[4px] cursor-pointer text-[#262626]">
+        New Game
+      </button>
     </main>
   );
 }
