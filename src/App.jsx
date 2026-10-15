@@ -18,14 +18,21 @@ export default function App() {
     );
   }
 
-  const languageElements = languages.map((lang) => {
+  const languageElements = languages.map((lang, index) => {
+    const isLanguageLost = index < wrongGuessCount;
     const styles = {
       backgroundColor: lang.backgroundColor,
       color: lang.color,
     };
 
+    const className = clsx(
+      "relative rounded-[3px] p-[4.5px]",
+      isLanguageLost &&
+        "before:content-['💀'] before:absolute before:inset-0 before:flex before:items-center before:justify-center before:text-[0.85rem] before:bg-black/70",
+    );
+
     return (
-      <span key={lang.name} className="rounded-[3px] p-[4.5px]" style={styles}>
+      <span key={lang.name} className={className} style={styles}>
         {lang.name}
       </span>
     );
