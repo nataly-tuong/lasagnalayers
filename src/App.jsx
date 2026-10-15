@@ -22,7 +22,7 @@ export default function App() {
   const letterElements = currentWord.split("").map((letter, index) => (
     <span
       key={index}
-      className="h-[40px] w-[40px] bg-[#323232] flex justify-center items-center text-[1.125rem] border-b border-[#F9F4DA]"
+      className="h-10 w-10 bg-[#323232] flex justify-center items-center text-[1.125rem] border-b border-[#F9F4DA]"
     >
       {letter.toUpperCase()}
     </span>
@@ -30,7 +30,7 @@ export default function App() {
 
   const keyboardElements = alphabet.split("").map((letter, index) => (
     <button
-      className="h-[35px] w-[35px] bg-[#FCBA29] border-1 border-[#D7D7D7] rounded-[3px] cursor-pointer text-[#262626]"
+      className="h-8.75 w-8.75 bg-[#FCBA29] border border-[#D7D7D7] rounded-[3px] cursor-pointer text-[#262626]"
       key="{letter}}"
     >
       {letter.toUpperCase()}
@@ -58,10 +58,10 @@ export default function App() {
       <section className="flex mt-5 justify-center gap-0.5">
         {letterElements}
       </section>
-      <section className="flex mt-5 flex-wrap gap-[8px] justify-center max-w-[450px]">
+      <section className="flex mt-5 flex-wrap gap-2 justify-center max-w-112.5">
         {keyboardElements}
       </section>
-      <button className="mt-6 h-[40px] w-[225px] bg-[#11B5E5] border-1 border-[#D7D7D7] rounded-[4px] cursor-pointer text-[#262626]">
+      <button className="mt-6 h-10 w-56.25 bg-[#11B5E5] border border-[#D7D7D7] rounded-sm cursor-pointer text-[#262626]">
         New Game
       </button>
     </main>
