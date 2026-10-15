@@ -32,7 +32,7 @@ export default function App() {
       key={index}
       className="h-10 w-10 bg-[#323232] flex justify-center items-center text-[1.125rem] border-b border-[#F9F4DA]"
     >
-      {letter.toUpperCase()}
+      {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
     </span>
   ));
 
@@ -71,7 +71,7 @@ export default function App() {
           from Assembly!
         </p>
       </header>
-      <section className="flex flex-col mb-6 items-center justify-center w-full max-w-87.5 min-h-15 mt-9 rounded bg-[#10A95B] text-[#F9F4DA] text-center">
+      <section className="flex flex-col mb-6 items-center justify-center w-full max-w-87.5 min-h-15 mt-9 rounded bg-correct text-[#F9F4DA] text-center">
         <h2 className="text-[1.25rem] font-bold m-0">You win!</h2>
         <p className="m-0">Well done 🎉</p>
       </section>
