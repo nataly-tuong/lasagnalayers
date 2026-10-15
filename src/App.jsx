@@ -3,8 +3,15 @@ import { languages } from "./languages";
 
 export default function App() {
   const [currentWord, setCurrentWord] = useState("react");
+  const [guessedLetters, setGuessedLetters] = useState([]);
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  function addGuessedLetter(letter) {
+    setGuessedLetters((prevLetters) =>
+      prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter],
+    );
+  }
 
   const languageElements = languages.map((lang) => {
     const styles = {
@@ -30,6 +37,7 @@ export default function App() {
 
   const keyboardElements = alphabet.split("").map((letter, index) => (
     <button
+      onClick={() => addGuessedLetter(letter)}
       className="h-8.75 w-8.75 bg-[#FCBA29] border border-[#D7D7D7] rounded-[3px] cursor-pointer text-[#262626]"
       key="{letter}}"
     >
