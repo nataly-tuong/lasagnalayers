@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { languages } from "./languages";
 import { clsx } from "clsx";
+import { getFarewellText } from "./utils";
 
 export default function App() {
   const [currentWord, setCurrentWord] = useState("react");
@@ -14,6 +15,12 @@ export default function App() {
     .every((letter) => guessedLetters.includes(letter));
   const isGameLost = wrongGuessCount >= languages.length - 1;
   const isGameOver = isGameWon || isGameLost;
+
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
+  const isLastGuessIncorrect = Boolean(
+    lastGuessedLetter && !currentWord.includes(lastGuessedLetter),
+  );
+  const isFarewell = !isGameOver && isLastGuessIncorrect;
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
@@ -81,12 +88,18 @@ export default function App() {
     {
       "bg-correct": isGameWon,
       "bg-wrong": isGameLost,
+      "bg-[#7A5EA7] border border-dashed border-[#323232] italic font-bold":
+        isFarewell,
     },
   );
 
   function renderGameStatus() {
-    if (!isGameOver) {
-      return null;
+    if (isFarewell) {
+      return (
+        <p className="m-0">
+          Farewell, {languages[wrongGuessCount - 1].name} 🫡
+        </p>
+      );
     }
 
     if (isGameWon) {
@@ -98,12 +111,16 @@ export default function App() {
       );
     }
 
-    return (
-      <>
-        <h2 className="text-[1.25rem] font-bold m-0">Game over!</h2>
-        <p className="m-0">You lose! Better start learning Assembly 😭</p>
-      </>
-    );
+    if (isGameLost) {
+      return (
+        <>
+          <h2 className="text-[1.25rem] font-bold m-0">Game over!</h2>
+          <p className="m-0">You lose! Better start learning Assembly 😭</p>
+        </>
+      );
+    }
+
+    return null;
   }
 
   return (
