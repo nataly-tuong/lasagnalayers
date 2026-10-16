@@ -2,6 +2,7 @@ import { useState } from "react";
 import { languages } from "./languages";
 import { clsx } from "clsx";
 import { getRandomWord, getFarewellText } from "./utils";
+import Confetti from "react-confetti";
 
 export default function App() {
   const numGuessesLeft = languages.length - 1;
@@ -140,6 +141,7 @@ export default function App() {
 
   return (
     <main className="flex flex-col items-center min-h-screen p-5 bg-[#262626] text-[#d9d9d9]">
+      {isGameWon && <Confetti recycle={false} numberOfPieces={1000} />}
       <header className="text-center">
         <h1 className="text-[1.25rem] font-bold text-[#F9F4DA]">
           Assembly: Endgame
