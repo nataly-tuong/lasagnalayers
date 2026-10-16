@@ -64,7 +64,7 @@ export default function App() {
     const isCorrect = isGuessed && currentWord.includes(letter);
     const isWrong = isGuessed && !currentWord.includes(letter);
     const className = clsx(
-      "h-8.75 w-8.75 border border-[#D7D7D7] rounded-[3px] cursor-pointer text-[#262626]",
+      "h-8.75 w-8.75 disabled:opacity-50 border border-[#D7D7D7] rounded-[3px] cursor-pointer text-[#262626]",
       {
         "bg-[#FCBA29]": !isGuessed,
         "bg-correct": isCorrect,
@@ -74,6 +74,7 @@ export default function App() {
 
     return (
       <button
+        disabled={isGameOver}
         onClick={() => addGuessedLetter(letter)}
         className={className}
         key="{letter}}"
