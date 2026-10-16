@@ -59,11 +59,13 @@ export default function App() {
   const letterElements = currentWord.split("").map((letter, index) => {
     const shouldRevealLetter = isGameLost || guessedLetters.includes(letter);
 
+    const letterClassName = clsx(
+      "h-10 w-10 bg-[#323232] flex justify-center items-center text-[1.125rem] border-b border-[#F9F4DA]",
+      isGameLost && !guessedLetters.includes(letter) && "text-[#EC5D49]",
+    );
+
     return (
-      <span
-        key={index}
-        className="h-10 w-10 bg-[#323232] flex justify-center items-center text-[1.125rem] border-b border-[#F9F4DA]"
-      >
+      <span key={index} className={letterClassName}>
         {shouldRevealLetter ? letter.toUpperCase() : ""}
       </span>
     );
