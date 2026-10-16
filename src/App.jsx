@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { languages } from "./languages";
 import { clsx } from "clsx";
-import { getFarewellText } from "./utils";
+import { getRandomWord, getFarewellText } from "./utils";
 
 export default function App() {
   const numGuessesLeft = languages.length - 1;
-  const [currentWord, setCurrentWord] = useState("react");
+  const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
 
   const wrongGuessCount = guessedLetters.filter(
