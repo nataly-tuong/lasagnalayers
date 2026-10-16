@@ -97,7 +97,7 @@ export default function App() {
     if (isFarewell) {
       return (
         <p className="m-0">
-          Farewell, {languages[wrongGuessCount - 1].name} 🫡
+          {getFarewellText(languages[wrongGuessCount - 1].name)}
         </p>
       );
     }
