@@ -76,6 +76,36 @@ export default function App() {
     );
   });
 
+  const gameStatusClass = clsx(
+    "flex flex-col items-center justify-center w-full max-w-87.5 min-h-15 mt-9 mb-6 rounded text-[#F9F4DA] text-center",
+    {
+      "bg-correct": isGameWon,
+      "bg-wrong": isGameLost,
+    },
+  );
+
+  function renderGameStatus() {
+    if (!isGameOver) {
+      return null;
+    }
+
+    if (isGameWon) {
+      return (
+        <>
+          <h2 className="text-[1.25rem] font-bold m-0">You win!</h2>
+          <p className="m-0">Well done 🎉</p>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <h2 className="text-[1.25rem] font-bold m-0">Game over!</h2>
+        <p className="m-0">You lose! Better start learning Assembly 😭</p>
+      </>
+    );
+  }
+
   return (
     <main className="flex flex-col items-center min-h-screen p-5 bg-[#262626] text-[#d9d9d9]">
       <header className="text-center">
@@ -87,10 +117,9 @@ export default function App() {
           from Assembly!
         </p>
       </header>
-      <section className="flex flex-col mb-6 items-center justify-center w-full max-w-87.5 min-h-15 mt-9 rounded bg-correct text-[#F9F4DA] text-center">
-        <h2 className="text-[1.25rem] font-bold m-0">You win!</h2>
-        <p className="m-0">Well done 🎉</p>
-      </section>
+
+      <section className={gameStatusClass}>{renderGameStatus()}</section>
+
       <section className="flex text-wrap gap-1.25 justify-center max-w-87.5">
         {languageElements}
       </section>
