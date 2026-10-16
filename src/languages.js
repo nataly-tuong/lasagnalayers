@@ -1,47 +1,11 @@
 export const languages = [
-  {
-    name: "HTML",
-    backgroundColor: "#E2680F",
-    color: "#F9F4DA",
-  },
-  {
-    name: "CSS",
-    backgroundColor: "#328AF1",
-    color: "#F9F4DA",
-  },
-  {
-    name: "JavaScript",
-    backgroundColor: "#F4EB13",
-    color: "#1E1E1E",
-  },
-  {
-    name: "React",
-    backgroundColor: "#2ED3E9",
-    color: "#1E1E1E",
-  },
-  {
-    name: "TypeScript",
-    backgroundColor: "#298EC6",
-    color: "#F9F4DA",
-  },
-  {
-    name: "Node.js",
-    backgroundColor: "#599137",
-    color: "#F9F4DA",
-  },
-  {
-    name: "Python",
-    backgroundColor: "#FFD742",
-    color: "#1E1E1E",
-  },
-  {
-    name: "Ruby",
-    backgroundColor: "#D02B2B",
-    color: "#F9F4DA",
-  },
-  {
-    name: "Assembly",
-    backgroundColor: "#2D519F",
-    color: "#F9F4DA",
-  },
+  { name: "Noodles", backgroundColor: "#F2D88C", color: "#5C4A1E" },
+  { name: "Ricotta", backgroundColor: "#FFF5E1", color: "#6B5B3E" },
+  { name: "Mozzarella", backgroundColor: "#FFE9A8", color: "#7A5C00" },
+  { name: "Marinara", backgroundColor: "#D7263D", color: "#FFFFFF" },
+  { name: "Beef", backgroundColor: "#7B3F2A", color: "#FFFFFF" },
+  { name: "Spinach", backgroundColor: "#3E7C3A", color: "#FFFFFF" },
+  { name: "Parmesan", backgroundColor: "#F4C95D", color: "#5C4A1E" },
+  { name: "Basil", backgroundColor: "#2E5E2A", color: "#FFFFFF" },
+  { name: "Bechamel", backgroundColor: "#FAF0D7", color: "#6B5B3E" },
 ];
