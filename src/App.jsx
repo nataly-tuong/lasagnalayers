@@ -4,6 +4,7 @@ import { clsx } from "clsx";
 import { getFarewellText } from "./utils";
 
 export default function App() {
+  const numGuessesLeft = languages.length - 1;
   const [currentWord, setCurrentWord] = useState("react");
   const [guessedLetters, setGuessedLetters] = useState([]);
 
@@ -13,7 +14,7 @@ export default function App() {
   const isGameWon = currentWord
     .split("")
     .every((letter) => guessedLetters.includes(letter));
-  const isGameLost = wrongGuessCount >= languages.length - 1;
+  const isGameLost = wrongGuessCount >= numGuessesLeft;
   const isGameOver = isGameWon || isGameLost;
 
   const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
@@ -76,6 +77,8 @@ export default function App() {
       <button
         disabled={isGameOver}
         onClick={() => addGuessedLetter(letter)}
+        aria-disabled={guessedLetters.includes(letter)}
+        aria-label={`Letter ${letter}`}
         className={className}
         key="{letter}}"
       >
@@ -136,13 +139,32 @@ export default function App() {
         </p>
       </header>
 
-      <section className={gameStatusClass}>{renderGameStatus()}</section>
+      <section aria-live="polite" role="status" className={gameStatusClass}>
+        {renderGameStatus()}
+      </section>
 
       <section className="flex text-wrap gap-1.25 justify-center max-w-87.5">
         {languageElements}
       </section>
       <section className="flex mt-5 justify-center gap-0.5">
         {letterElements}
+      </section>
+      <section className="sr-only" aria-live="polite" role="status">
+        <p>
+          {currentWord.includes(lastGuessedLetter)
+            ? `Correct! The letter $(lastGuessedLetter) is not in teh word.`
+            : `Sorry, the letter ${lastGuessedLetter} is not in the word.`}
+          You have {numGuessesLeft} attempts left.
+        </p>
+        <p>
+          Current word:
+          {currentWord
+            .split("")
+            .map((letter) =>
+              guessedLetters.includes(letter) ? letter : "blank.",
+            )
+            .join(" ")}
+        </p>
       </section>
       <section className="flex mt-5 flex-wrap gap-2 justify-center max-w-112.5">
         {keyboardElements}
