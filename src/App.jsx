@@ -31,6 +31,11 @@ export default function App() {
     );
   }
 
+  function startNewGame() {
+    setCurrentWord(getRandomWord());
+    setGuessedLetters([]);
+  }
+
   const languageElements = languages.map((lang, index) => {
     const isLanguageLost = index < wrongGuessCount;
     const styles = {
@@ -170,7 +175,10 @@ export default function App() {
         {keyboardElements}
       </section>
       {isGameOver && (
-        <button className="mt-6 h-10 w-56.25 bg-[#11B5E5] border border-[#D7D7D7] rounded-sm cursor-pointer text-[#262626]">
+        <button
+          onClick={startNewGame}
+          className="mt-6 h-10 w-56.25 bg-[#11B5E5] border border-[#D7D7D7] rounded-sm cursor-pointer text-[#262626]"
+        >
           New Game
         </button>
       )}
