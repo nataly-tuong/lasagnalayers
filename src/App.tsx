@@ -7,6 +7,7 @@ import ConfettiContainer from "./components/ConfettiContainer";
 import GameStatus from "./components/GameStatus";
 import AriaLiveStatus from "./components/AriaLiveStatus";
 import LanguageChips from "./components/LanguageChips";
+import WordLetters from "./components/WordLetters";
 
 export default function App() {
   const maxGuesses = languages.length - 1;
@@ -42,21 +43,6 @@ export default function App() {
     setCurrentWord(getRandomWord());
     setGuessedLetters([]);
   }
-
-  const letterElements = currentWord.split("").map((letter, index) => {
-    const shouldRevealLetter = isGameLost || guessedLetters.includes(letter);
-
-    const letterClassName = clsx(
-      "h-10 w-10 bg-[#3A2418] flex justify-center items-center text-[1.125rem] border-b border-[#F9F4DA]",
-      isGameLost && !guessedLetters.includes(letter) && "text-[#EC5D49]",
-    );
-
-    return (
-      <span key={index} className={letterClassName}>
-        {shouldRevealLetter ? letter.toUpperCase() : ""}
-      </span>
-    );
-  });
 
   const keyboardElements = alphabet.split("").map((letter) => {
     const isGuessed = guessedLetters.includes(letter);
@@ -107,9 +93,11 @@ export default function App() {
         </p>
       )}
 
-      <section className="flex mt-5 justify-center gap-0.5">
-        {letterElements}
-      </section>
+      <WordLetters
+        currentWord={currentWord}
+        guessedLetters={guessedLetters}
+        isGameLost={isGameLost}
+      />
 
       <AriaLiveStatus
         currentWord={currentWord}
