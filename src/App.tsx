@@ -2,7 +2,8 @@ import { useState } from "react";
 import { languages } from "./languages";
 import { clsx } from "clsx";
 import { getRandomWord, getFarewellText } from "./utils";
-import Confetti from "react-confetti";
+import Header from "./components/Header";
+import ConfettiContainer from "./components/ConfettiContainer";
 
 export default function App() {
   const maxGuesses = languages.length - 1;
@@ -146,22 +147,9 @@ export default function App() {
 
   return (
     <main className="flex flex-col items-center min-h-screen p-5 bg-[#2B1810] text-[#d9d9d9]">
-      {isGameWon && (
-        <Confetti
-          recycle={false}
-          numberOfPieces={1000}
-          colors={["#D7263D", "#FFE9A8", "#F4C95D", "#3E7C3A", "#FFF5E1"]}
-        />
-      )}
-      <header className="text-center">
-        <h1 className="text-[1.25rem] font-bold text-[#F9F4DA]">
-          Lasagna Layers
-        </h1>
-        <p className="text-[0.875rem] max-w-87.5 mx-auto text-[#A89684]">
-          Guess the word within 8 attempts to keep the last layer safe from
-          hungry hands!
-        </p>
-      </header>
+      <ConfettiContainer isGameWon={isGameWon} />
+
+      <Header />
 
       <section aria-live="polite" role="status" className={gameStatusClass}>
         {renderGameStatus()}
