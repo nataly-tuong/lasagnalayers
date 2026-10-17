@@ -29,13 +29,13 @@ export default function App() {
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-  function addGuessedLetter(letter) {
-    setGuessedLetters((prevLetters) =>
+  function addGuessedLetter(letter: string): void {
+    setGuessedLetters((prevLetters: string[]): string[] =>
       prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter],
     );
   }
 
-  function startNewGame() {
+  function startNewGame(): void {
     setCurrentWord(getRandomWord());
     setGuessedLetters([]);
   }
