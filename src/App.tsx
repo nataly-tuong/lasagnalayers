@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { languages } from "./languages";
 import { clsx } from "clsx";
-import { getRandomWord, getFarewellText } from "./utils";
+import { getRandomWord } from "./utils";
 import Header from "./components/Header";
 import ConfettiContainer from "./components/ConfettiContainer";
+import GameStatus from "./components/GameStatus";
 
 export default function App() {
   const maxGuesses = languages.length - 1;
@@ -26,7 +27,6 @@ export default function App() {
   const isLastGuessIncorrect: boolean = Boolean(
     lastGuessedLetter && !currentWord.includes(lastGuessedLetter),
   );
-  const isFarewell: boolean = !isGameOver && isLastGuessIncorrect;
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
@@ -103,57 +103,19 @@ export default function App() {
     );
   });
 
-  const gameStatusClass = clsx(
-    "flex flex-col items-center justify-center w-full max-w-87.5 min-h-15 mt-9 mb-6 rounded text-[#F9F4DA] text-center",
-    {
-      "bg-correct": isGameWon,
-      "bg-wrong": isGameLost,
-      "bg-[#8C4A2F] border border-dashed border-[#F9F4DA] italic font-bold":
-        isFarewell,
-    },
-  );
-
-  function renderGameStatus() {
-    if (isFarewell) {
-      return (
-        <p className="m-0">
-          {getFarewellText(languages[wrongGuessCount - 1].name)}
-        </p>
-      );
-    }
-
-    if (isGameWon) {
-      return (
-        <>
-          <h2 className="text-[1.25rem] font-bold m-0">Perfect bake!</h2>
-          <p className="m-0">Nonna would be proud 🍝</p>
-        </>
-      );
-    }
-
-    if (isGameLost) {
-      return (
-        <>
-          <h2 className="text-[1.25rem] font-bold m-0">Burnt to a crisp!</h2>
-          <p className="m-0">
-            Nothing left but the pan. Time to preheat again 🔥
-          </p>
-        </>
-      );
-    }
-
-    return null;
-  }
-
   return (
     <main className="flex flex-col items-center min-h-screen p-5 bg-[#2B1810] text-[#d9d9d9]">
       <ConfettiContainer isGameWon={isGameWon} />
 
       <Header />
 
-      <section aria-live="polite" role="status" className={gameStatusClass}>
-        {renderGameStatus()}
-      </section>
+      <GameStatus
+        isGameWon={isGameWon}
+        isGameLost={isGameLost}
+        isGameOver={isGameOver}
+        isLastGuessIncorrect={isLastGuessIncorrect}
+        wrongGuessCount={wrongGuessCount}
+      />
 
       <section className="flex text-wrap gap-1.25 justify-center max-w-87.5">
         {languageElements}
