@@ -1,11 +1,12 @@
 import { words } from "./words";
 
-export function getRandomWord() {
-  return words[Math.floor(Math.random() * words.length)];
+export function getRandomWord(): string {
+  const randomIndex:number = Math.floor(Math.random() * words.length);
+  return words[randomIndex];
 }
 
-export function getFarewellText(layer) {
-  const options = [
+export function getFarewellText(layer:string):string {
+  const options:string[] = [
     `Goodbye, ${layer}. You were the best part.`,
     `Someone just ate the ${layer}.`,
     `${layer} has left the pan.`,
@@ -15,5 +16,7 @@ export function getFarewellText(layer) {
     `${layer} didn't survive the dinner rush.`,
     `Who took the ${layer}?!`,
   ];
-  return options[Math.floor(Math.random() * options.length)];
+  
+  const randomIndex:number = Math.floor(Math.random() * options.length));
+  return options[randomIndex];
 }
