@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { languages } from "./languages";
-import { clsx } from "clsx";
 import { getRandomWord } from "./utils";
 import Header from "./components/Header";
 import ConfettiContainer from "./components/ConfettiContainer";
@@ -8,6 +7,7 @@ import GameStatus from "./components/GameStatus";
 import AriaLiveStatus from "./components/AriaLiveStatus";
 import LanguageChips from "./components/LanguageChips";
 import WordLetters from "./components/WordLetters";
+import Keyboard from "./components/Keyboard";
 import NewGameButton from "./components/NewGameButton";
 
 export default function App() {
@@ -32,8 +32,6 @@ export default function App() {
     lastGuessedLetter && !currentWord.includes(lastGuessedLetter),
   );
 
-  const alphabet = "abcdefghijklmnopqrstuvwxyz";
-
   function addGuessedLetter(letter: string): void {
     setGuessedLetters((prevLetters: string[]): string[] =>
       prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter],
@@ -44,33 +42,6 @@ export default function App() {
     setCurrentWord(getRandomWord());
     setGuessedLetters([]);
   }
-
-  const keyboardElements = alphabet.split("").map((letter) => {
-    const isGuessed = guessedLetters.includes(letter);
-    const isCorrect = isGuessed && currentWord.includes(letter);
-    const isWrong = isGuessed && !currentWord.includes(letter);
-    const className = clsx(
-      "h-8.75 w-8.75 disabled:opacity-50 border border-[#D7D7D7] rounded-[3px] cursor-pointer text-[#262626]",
-      {
-        "bg-[#FCBA29]": !isGuessed,
-        "bg-correct": isCorrect,
-        "bg-wrong": isWrong,
-      },
-    );
-
-    return (
-      <button
-        disabled={isGameOver}
-        onClick={() => addGuessedLetter(letter)}
-        aria-disabled={guessedLetters.includes(letter)}
-        aria-label={`Letter ${letter}`}
-        className={className}
-        key={letter}
-      >
-        {letter.toUpperCase()}
-      </button>
-    );
-  });
 
   return (
     <main className="flex flex-col items-center min-h-screen p-5 bg-[#2B1810] text-[#d9d9d9]">
@@ -107,9 +78,12 @@ export default function App() {
         guessesLeft={guessesLeft}
       />
 
-      <section className="flex mt-5 flex-wrap gap-2 justify-center max-w-112.5">
-        {keyboardElements}
-      </section>
+      <Keyboard
+        currentWord={currentWord}
+        guessedLetters={guessedLetters}
+        isGameOver={isGameOver}
+        addGuessedLetter={addGuessedLetter}
+      />
 
       <NewGameButton isGameOver={isGameOver} startNewGame={startNewGame} />
     </main>
