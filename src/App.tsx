@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import ConfettiContainer from "./components/ConfettiContainer";
 import GameStatus from "./components/GameStatus";
 import AriaLiveStatus from "./components/AriaLiveStatus";
+import LanguageChips from "./components/LanguageChips";
 
 export default function App() {
   const maxGuesses = languages.length - 1;
@@ -41,26 +42,6 @@ export default function App() {
     setCurrentWord(getRandomWord());
     setGuessedLetters([]);
   }
-
-  const languageElements = languages.map((lang, index) => {
-    const isLanguageLost = index < wrongGuessCount;
-    const styles = {
-      backgroundColor: lang.backgroundColor,
-      color: lang.color,
-    };
-
-    const className = clsx(
-      "relative rounded-[3px] p-[4.5px]",
-      isLanguageLost &&
-        "before:content-['🍴'] before:absolute before:inset-0 before:flex before:items-center before:justify-center before:text-[0.85rem] before:bg-black/70",
-    );
-
-    return (
-      <span key={lang.name} className={className} style={styles}>
-        {lang.name}
-      </span>
-    );
-  });
 
   const letterElements = currentWord.split("").map((letter, index) => {
     const shouldRevealLetter = isGameLost || guessedLetters.includes(letter);
@@ -118,9 +99,7 @@ export default function App() {
         wrongGuessCount={wrongGuessCount}
       />
 
-      <section className="flex text-wrap gap-1.25 justify-center max-w-87.5">
-        {languageElements}
-      </section>
+      <LanguageChips languages={languages} wrongGuessCount={wrongGuessCount} />
 
       {!isGameOver && (
         <p className="mt-3 text-[0.875rem] text-[#A89684]">
