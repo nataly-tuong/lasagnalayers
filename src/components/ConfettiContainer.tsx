@@ -1,19 +1,24 @@
 import Confetti from "react-confetti";
+import type { JSX } from "react";
 
-type Props = {
+export default function ConfettiContainer({
+  isGameWon,
+}: {
   isGameWon: boolean;
-};
-
-export default function ConfettiContainer(props: Props) {
-  return (
-    <>
-      {props.isGameWon && (
-        <Confetti
-          recycle={false}
-          numberOfPieces={1000}
-          colors={["#D7263D", "#FFE9A8", "#F4C95D", "#3E7C3A", "#FFF5E1"]}
-        />
-      )}
-    </>
-  );
+}): JSX.Element | null {
+  if (!isGameWon) {
+    return null;
+  } else {
+    return (
+      <>
+        {isGameWon && (
+          <Confetti
+            recycle={false}
+            numberOfPieces={1000}
+            colors={["#D7263D", "#FFE9A8", "#F4C95D", "#3E7C3A", "#FFF5E1"]}
+          />
+        )}
+      </>
+    );
+  }
 }
