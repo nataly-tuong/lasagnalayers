@@ -6,24 +6,26 @@ import Confetti from "react-confetti";
 
 export default function App() {
   const maxGuesses = languages.length - 1;
-  const [currentWord, setCurrentWord] = useState(() => getRandomWord());
-  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [currentWord, setCurrentWord] = useState<string>((): string =>
+    getRandomWord(),
+  );
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
-  const wrongGuessCount = guessedLetters.filter(
-    (letter) => !currentWord.includes(letter),
+  const wrongGuessCount: number = guessedLetters.filter(
+    (letter: string): boolean => !currentWord.includes(letter),
   ).length;
-  const guessesLeft = maxGuesses - wrongGuessCount;
-  const isGameWon = currentWord
+  const guessesLeft: number = maxGuesses - wrongGuessCount;
+  const isGameWon: boolean = currentWord
     .split("")
-    .every((letter) => guessedLetters.includes(letter));
-  const isGameLost = wrongGuessCount >= maxGuesses;
-  const isGameOver = isGameWon || isGameLost;
+    .every((letter: string): boolean => guessedLetters.includes(letter));
+  const isGameLost: boolean = wrongGuessCount >= maxGuesses;
+  const isGameOver: boolean = isGameWon || isGameLost;
 
-  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
-  const isLastGuessIncorrect = Boolean(
+  const lastGuessedLetter: string = guessedLetters[guessedLetters.length - 1];
+  const isLastGuessIncorrect: boolean = Boolean(
     lastGuessedLetter && !currentWord.includes(lastGuessedLetter),
   );
-  const isFarewell = !isGameOver && isLastGuessIncorrect;
+  const isFarewell: boolean = !isGameOver && isLastGuessIncorrect;
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
