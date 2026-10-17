@@ -8,6 +8,7 @@ import GameStatus from "./components/GameStatus";
 import AriaLiveStatus from "./components/AriaLiveStatus";
 import LanguageChips from "./components/LanguageChips";
 import WordLetters from "./components/WordLetters";
+import NewGameButton from "./components/NewGameButton";
 
 export default function App() {
   const maxGuesses = languages.length - 1;
@@ -110,14 +111,7 @@ export default function App() {
         {keyboardElements}
       </section>
 
-      {isGameOver && (
-        <button
-          onClick={startNewGame}
-          className="mt-6 h-10 w-56.25 bg-[#11B5E5] border border-[#D7D7D7] rounded-sm cursor-pointer text-[#262626]"
-        >
-          New Game
-        </button>
-      )}
+      <NewGameButton isGameOver={isGameOver} startNewGame={startNewGame} />
     </main>
   );
 }
