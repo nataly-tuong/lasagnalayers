@@ -1,4 +1,10 @@
-export const languages = [
+type Language = {
+  name: string;
+  backgroundColor: string;
+  color: string;
+};
+
+export const languages: Language[] = [
   { name: "Noodles", backgroundColor: "#F2D88C", color: "#5C4A1E" },
   { name: "Ricotta", backgroundColor: "#FFF5E1", color: "#6B5B3E" },
   { name: "Mozzarella", backgroundColor: "#FFE9A8", color: "#7A5C00" },
